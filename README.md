@@ -1,3 +1,4 @@
+![logo][logo]
 # Vim-Two-Firewatch Colorscheme
 
 Vim-Two-Firewatch is a GUI and true color optimised colorscheme that gracefully adapts if your
@@ -51,5 +52,6 @@ let g:airline_theme='twofirewatch' " if you have Airline installed and want the 
 
 If your environment supports italic, you can set `g:two_firewatch_italics=1` in your `vimrc`
 
+[logo]: screenshots/logo.png
 [screenshot_dark]: screenshots/dark-variation.png
 [screenshot_light]: screenshots/light-variation.png
