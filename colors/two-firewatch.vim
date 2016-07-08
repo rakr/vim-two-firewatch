@@ -570,6 +570,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('rubyBlock',                     s:uno_2,         '', '')
   call <sid>X('rubyBlockParameter',            s:uno_2,         '', '')
   call <sid>X('rubyBlockParameterList',        s:uno_3,         '', '')
+  call <sid>X('rubyCapitalizedMethod',         s:duo_2,         '', '')
   call <sid>X('rubyClass',                     s:duo_2,         '', '')
   call <sid>X('rubyConstant',                  s:uno_3,         '', '')
   call <sid>X('rubyControl',                   s:duo_2,         '', '')
