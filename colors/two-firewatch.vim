@@ -12,7 +12,7 @@ syntax reset
 "endif
 let g:colors_name = 'two-firewatch'
 
-if !exists("g:two_firewatch_italics")
+if !exists('g:two_firewatch_italics')
   let g:two_firewatch_italics = 0
 endif
 
