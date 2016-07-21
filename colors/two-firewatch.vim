@@ -320,7 +320,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('TabLine',      s:uno_4,          '',                   '')
   call <sid>X('TabLineFill',  '',               '',                   'none')
   call <sid>X('TabLineSel',   s:syntax_fg,      '',                   '')
-  call <sid>X('Title',        s:duo_2,          '',                   'none')
+  call <sid>X('Title',        s:duo_2,          '',                   'bold')
   call <sid>X('Visual',       '',               s:syntax_selection,   '')
   call <sid>X('VisualNOS',    '',               s:syntax_selection,   '')
   call <sid>X('WarningMsg',   s:syntax_accent,  '',                   '')
@@ -460,6 +460,10 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('elixirAtom',            s:duo_1,'', '')
   " }}}
 
+  " Go highlighting ---------------------------------------------------------{{{
+  call <sid>X('goDeclaration',         s:duo_3, '', '')
+  " }}}
+
   " Git and git related plugins highlighting --------------------------------{{{
   call <sid>X('gitcommitComment',       s:uno_4,         '', '')
   call <sid>X('gitcommitUnmerged',      s:duo_2,         '', '')
@@ -562,8 +566,10 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Markdown highlighting ---------------------------------------------------{{{
-  call <sid>X('markdownUrl',     s:duo_3, '', '')
-  call <sid>X('markdownCode',    s:duo_1, '', '')
+  call <sid>X('markdownUrl',              s:duo_3, '', '')
+  call <sid>X('markdownCode',             s:duo_1, '', '')
+  call <sid>X('markdownHeadingDelimiter', s:duo_3, '', '')
+  call <sid>X('markdownListMarker',       s:duo_3, '', '')
   " }}}
 
   " Ruby highlighting -------------------------------------------------------{{{
