@@ -276,7 +276,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_color_modified = 'e0c285'
     let s:syntax_color_removed  = 'e05252'
 
-    let s:syntax_fg               = 'abb2bf' " s:uno_2
+    let s:syntax_fg               = 'abb2bf'
     let s:syntax_bg               = '282c34'
     let s:syntax_accent           = 'ff8b52'
     let s:syntax_gutter           = '636d83'
@@ -298,7 +298,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Directory',    s:uno_1,          '',                   '')
   call <sid>X('ErrorMsg',     s:syntax_accent,  s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
-  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
+  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     'italic')
   call <sid>X('FoldColumn',   '',               s:uno_4,              '')
   call <sid>X('IncSearch',    s:syntax_bg,      s:uno_4,              '')
   call <sid>X('LineNr',       s:syntax_fold_bg, '',                   '')
@@ -334,7 +334,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " Standard syntax highlighting --------------------------------------------{{{
   call <sid>X('Comment',        s:uno_4,         '',          'italic')
   call <sid>X('Constant',       s:duo_2,         '',          '')
-  call <sid>X('String',         s:duo_1,         '',          '')
+  call <sid>X('String',         s:duo_1,         '',          'italic')
   call <sid>X('Character',      s:duo_2,         '',          '')
   call <sid>X('Number',         s:duo_2,         '',          '')
   call <sid>X('Boolean',        s:duo_2,         '',          '')
@@ -369,6 +369,25 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Todo',           s:duo_2,         s:syntax_bg, '')
   " }}}
 
+  " Asciidoc highlighting ---------------------------------------------------{{{
+  call <sid>X('asciidocListingBlock',   s:uno_2,  '', '')
+  " }}}
+
+  " Cucumber highlighting ---------------------------------------------------{{{
+  call <sid>X('cucumberGiven',           s:duo_2,         '', '')
+  call <sid>X('cucumberWhen',            s:duo_2,         '', '')
+  call <sid>X('cucumberWhenAnd',         s:duo_2,         '', '')
+  call <sid>X('cucumberThen',            s:duo_2,         '', '')
+  call <sid>X('cucumberThenAnd',         s:duo_2,         '', '')
+  call <sid>X('cucumberUnparsed',        s:duo_1,         '', '')
+  call <sid>X('cucumberFeature',         s:syntax_accent, '', 'bold')
+  call <sid>X('cucumberBackground',      s:duo_2,         '', 'bold')
+  call <sid>X('cucumberScenario',        s:duo_2,         '', 'bold')
+  call <sid>X('cucumberScenarioOutline', s:duo_2,         '', 'bold')
+  call <sid>X('cucumberTags',            s:uno_4,         '', 'bold')
+  call <sid>X('cucumberDelimiter',       s:uno_4,         '', 'bold')
+  " }}}
+
   " Diff highlighting -------------------------------------------------------{{{
   call <sid>X('DiffAdd',     s:syntax_color_added,    s:syntax_selection, '')
   call <sid>X('DiffChange',  s:syntax_color_modified, s:syntax_selection, '')
@@ -379,10 +398,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('DiffNewFile', s:duo_2,                 s:syntax_selection, '')
   call <sid>X('DiffLine',    s:uno_2,                 s:syntax_selection, '')
   call <sid>X('DiffRemoved', s:syntax_accent,         s:syntax_selection, '')
-  " }}}
-
-  " Asciidoc highlighting ---------------------------------------------------{{{
-  call <sid>X('asciidocListingBlock',   s:uno_2,  '', '')
   " }}}
 
   " C/C++ and other languages like that -------------------------------------{{{
@@ -438,21 +453,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('sassMixing',             s:duo_3,         '', '')
   call <sid>X('sassVariable',           s:uno_2,         '', '')
   call <sid>X('sassVariableAssignment', s:uno_4,         '', '')
-  " }}}
-
-  " Cucumber highlighting ---------------------------------------------------{{{
-  call <sid>X('cucumberGiven',           s:duo_2,         '', '')
-  call <sid>X('cucumberWhen',            s:duo_2,         '', '')
-  call <sid>X('cucumberWhenAnd',         s:duo_2,         '', '')
-  call <sid>X('cucumberThen',            s:duo_2,         '', '')
-  call <sid>X('cucumberThenAnd',         s:duo_2,         '', '')
-  call <sid>X('cucumberUnparsed',        s:duo_1,         '', '')
-  call <sid>X('cucumberFeature',         s:syntax_accent, '', 'bold')
-  call <sid>X('cucumberBackground',      s:duo_2,         '', 'bold')
-  call <sid>X('cucumberScenario',        s:duo_2,         '', 'bold')
-  call <sid>X('cucumberScenarioOutline', s:duo_2,         '', 'bold')
-  call <sid>X('cucumberTags',            s:uno_4,         '', 'bold')
-  call <sid>X('cucumberDelimiter',       s:uno_4,         '', 'bold')
   " }}}
 
   " Elixir highlighting------------------------------------------------------{{{
