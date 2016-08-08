@@ -345,7 +345,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Conditional',    s:syntax_accent, '',          '')
   call <sid>X('Repeat',         s:duo_2,         '',          '')
   call <sid>X('Label',          s:uno_1,         '',          '')
-  call <sid>X('Operator',       '',              '',          'none')
+  call <sid>X('Operator',       s:syntax_accent, '',          'none')
   call <sid>X('Keyword',        s:uno_1,         '',          '')
   call <sid>X('Exception',      s:uno_1,         '',          '')
   call <sid>X('PreProc',        s:uno_1,         '',          '')
