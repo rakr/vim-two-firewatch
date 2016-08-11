@@ -258,10 +258,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_fold_bg          = 'd1cec7'
     let s:syntax_cursor_line      = 'F3EFE7'
   else
-    let s:duo_1 = 'fe8c52'
-    let s:duo_2 = 'df671f'
-    let s:duo_3 = '6a574d'
-
     let s:uno_1 = 'd6e9ff'
     let s:uno_2 = '91c1f8'
     let s:uno_3 = '6e88a6'
