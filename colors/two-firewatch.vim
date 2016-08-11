@@ -237,7 +237,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " Color definition --------------------------------------------------------{{{
   if &background ==? 'light'
     let s:uno_1 = '2d2006'
-    let s:uno_2 = '896724'
+    let s:uno_2 = 'abb2bf'
     let s:uno_3 = 'B29762'
     let s:uno_4 = 'B6ad9a'
 
@@ -278,7 +278,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
     let s:syntax_fg               = 'abb2bf'
     let s:syntax_bg               = '282c34'
-    let s:syntax_accent           = 'ff8b52'
+    let s:syntax_accent           = '56b6c2'
     let s:syntax_gutter           = '636d83'
     let s:syntax_selection        = '3e4452'
     let s:syntax_fold_bg          = '5c6370'
@@ -298,7 +298,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Directory',    s:uno_1,          '',                   '')
   call <sid>X('ErrorMsg',     s:syntax_accent,  s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
-  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     'italic')
+  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   '',               s:uno_4,              '')
   call <sid>X('IncSearch',    s:syntax_bg,      s:uno_4,              '')
   call <sid>X('LineNr',       s:syntax_fold_bg, '',                   '')
@@ -334,7 +334,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " Standard syntax highlighting --------------------------------------------{{{
   call <sid>X('Comment',        s:uno_4,         '',          'italic')
   call <sid>X('Constant',       s:duo_2,         '',          '')
-  call <sid>X('String',         s:duo_1,         '',          'italic')
+  call <sid>X('String',         s:duo_1,         '',          '')
   call <sid>X('Character',      s:duo_2,         '',          '')
   call <sid>X('Number',         s:duo_2,         '',          '')
   call <sid>X('Boolean',        s:duo_2,         '',          '')
@@ -457,7 +457,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
   " Elixir highlighting------------------------------------------------------{{{
   call <sid>X('elixirBlockDefinition', s:duo_3, '', '')
-  call <sid>X('elixirAtom',            s:duo_1,'', '')
+  call <sid>X('elixirAtom',            s:syntax_accent,'', '')
   " }}}
 
   " Go highlighting ---------------------------------------------------------{{{
