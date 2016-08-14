@@ -237,7 +237,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " Color definition --------------------------------------------------------{{{
   if &background ==? 'light'
     let s:uno_1 = '2d2006'
-    let s:uno_2 = 'abb2bf'
+    let s:uno_2 = '896724'
     let s:uno_3 = 'B29762'
     let s:uno_4 = 'B6ad9a'
 
