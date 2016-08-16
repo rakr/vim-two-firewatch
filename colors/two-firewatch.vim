@@ -457,9 +457,11 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Elixir highlighting------------------------------------------------------{{{
-  call <sid>X('elixirBlockDefinition',   s:duo_2,         '', '')
   call <sid>X('elixirAtom',              s:syntax_accent, '', '')
-  call <sid>X('elixirAlias',             s:uno_2,         '', '')
+  call <sid>X('elixirAlias',             s:duo_3,         '', '')
+  call <sid>X('elixirBlockDefinition',   s:duo_2,         '', '')
+  call <sid>X('elixirInclude',           s:uno_1,         '', '')
+  call <sid>X('elixirId',                s:uno_1,         '', '')
   call <sid>X('elixirModuleDeclaration', s:uno_1,         '', '')
   call <sid>X('elixirOperator',          s:uno_3,         '', '')
   " }}}
