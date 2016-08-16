@@ -258,8 +258,13 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_fold_bg          = 'd1cec7'
     let s:syntax_cursor_line      = 'F3EFE7'
   else
+    "let s:uno_1 = 'd6e9ff'
+    "let s:uno_2 = '91c1f8'
+    "let s:uno_3 = '6e88a6'
+    "let s:uno_4 = '55606d'
+
     let s:uno_1 = 'd6e9ff'
-    let s:uno_2 = '91c1f8'
+    let s:uno_2 = 'abb2bf'
     let s:uno_3 = '6e88a6'
     let s:uno_4 = '55606d'
 
@@ -272,7 +277,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_color_modified = 'e0c285'
     let s:syntax_color_removed  = 'e05252'
 
-    let s:syntax_fg               = 'abb2bf'
+    let s:syntax_fg               = s:uno_2
     let s:syntax_bg               = '282c34'
     let s:syntax_accent           = '56b6c2'
     let s:syntax_gutter           = '636d83'
@@ -524,6 +529,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('jsGlobalObjects',        s:uno_1,         '', '')
   call <sid>X('jsModuleWords',          s:duo_3,         '', '')
   call <sid>X('jsModules',              s:duo_3,         '', '')
+  call <sid>X('jsNoise',                s:uno_3,         '', '')
   call <sid>X('jsNull',                 s:uno_1,         '', '')
   call <sid>X('jsOperator',             s:duo_3,         '', '')
   call <sid>X('jsStorageClass',         s:duo_3,         '', '')
@@ -554,12 +560,12 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
   " JSON highlighting -------------------------------------------------------{{{
   call <sid>X('jsonCommentError',      s:uno_1,         '', ''        )
-  call <sid>X('jsonKeyword',           s:uno_2,         '', ''        )
+  call <sid>X('jsonKeyword',           s:duo_2,         '', ''        )
   call <sid>X('jsonQuote',             s:uno_4,         '', ''        )
   call <sid>X('jsonMissingCommaError', s:syntax_accent, '', 'reverse' )
   call <sid>X('jsonNoQuotesError',     s:syntax_accent, '', 'reverse' )
   call <sid>X('jsonNumError',          s:syntax_accent, '', 'reverse' )
-  call <sid>X('jsonString',            s:duo_2,         '', ''        )
+  call <sid>X('jsonString',            s:duo_1,         '', ''        )
   call <sid>X('jsonStringSQError',     s:syntax_accent, '', 'reverse' )
   call <sid>X('jsonSemicolonError',    s:syntax_accent, '', 'reverse' )
   " }}}
@@ -569,6 +575,15 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('markdownCode',             s:duo_1, '', '')
   call <sid>X('markdownHeadingDelimiter', s:duo_3, '', '')
   call <sid>X('markdownListMarker',       s:duo_3, '', '')
+
+  call <sid>X('mkdDelimiter',             s:uno_3, '', '')
+  call <sid>X('mkdLink',                  s:duo_1, '', '')
+  call <sid>X('mkdLinkDef',               s:duo_1, '', '')
+  call <sid>X('mkdLinkDefTarget',         s:duo_1, '', 'underline')
+  call <sid>X('mkdURL',                   s:duo_1, '', 'underline')
+
+  call <sid>X('htmlBold',                 s:uno_2, '', 'bold')
+  call <sid>X('htmlItalic',               s:uno_2, '', 'italic')
   " }}}
 
   " NERDTree highlighting ---------------------------------------------------{{{
