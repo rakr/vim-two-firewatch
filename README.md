@@ -52,6 +52,15 @@ let g:airline_theme='twofirewatch' " if you have Airline installed and want the 
 
 If your environment supports italic, you can set `g:two_firewatch_italics=1` in your `vimrc`
 
+## Toggling background
+
+When you switch background, Vim reapplies the same colorscheme. The builtin Vim way is `:set bg=dark` or `:set bg=light`.
+If you want to speed the process, because like me you use a light colorscheme during the day and a dark one at night, there is a solution:
+
+[Toggle BG](https://github.com/rakr/vim-togglebg)
+
+This script has been extracted from the Solarized colorscheme and will allow you to switch background with on key stroke.
+
 [logo]: screenshots/logo.png
 [screenshot_dark]: screenshots/dark-variation.png
 [screenshot_light]: screenshots/light-variation.png
