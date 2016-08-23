@@ -300,7 +300,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('ErrorMsg',     s:syntax_accent,  s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
   call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
-  call <sid>X('FoldColumn',   '',               s:uno_4,              '')
+  call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
   call <sid>X('IncSearch',    s:syntax_bg,      s:uno_4,              '')
   call <sid>X('LineNr',       s:syntax_fold_bg, '',                   '')
   call <sid>X('CursorLineNr', s:uno_2,          '',                   'none')
@@ -459,6 +459,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " Elixir highlighting------------------------------------------------------{{{
   call <sid>X('elixirAtom',              s:syntax_accent, '', '')
   call <sid>X('elixirAlias',             s:duo_1,         '', '')
+  call <sid>X('elixirBlock',             s:uno_3,         '', '')
   call <sid>X('elixirBlockDefinition',   s:duo_2,         '', '')
   call <sid>X('elixirInclude',           s:duo_2,         '', '')
   call <sid>X('elixirId',                s:uno_2,         '', '')
