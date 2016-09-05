@@ -281,6 +281,24 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_cursor_line      = '2c323c'
   endif
 
+  " neovim :terminal colors
+  let g:terminal_color_0 = "#282c34"
+  let g:terminal_color_8 = "#282c34"
+  let g:terminal_color_1 = "#e06c75"
+  let g:terminal_color_9 = "#e06c75"
+  let g:terminal_color_2 = "#98c379"
+  let g:terminal_color_10 = "#98c379"
+  let g:terminal_color_3 = "#e5c07b"
+  let g:terminal_color_11 = "#e5c07b"
+  let g:terminal_color_4 = "#61afef"
+  let g:terminal_color_12 = "#61afef"
+  let g:terminal_color_5 = "#c678dd"
+  let g:terminal_color_13 = "#c678dd"
+  let g:terminal_color_6 = "#56b6c2"
+  let g:terminal_color_14 = "#56b6c2"
+  let g:terminal_color_7 = "#dcdfe4"
+  let g:terminal_color_15 = "#dcdfe4"
+
   "}}}
 
   " Vim editor color --------------------------------------------------------{{{
