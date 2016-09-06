@@ -65,7 +65,7 @@ This script has been extracted from the Solarized colorscheme and will allow you
 
 I would like to thank the following people for their contributions:
 
-* [keremc](https://github.com/keremc), for adding the support for Neovim's terminal
+* [Keremc](https://github.com/keremc), for adding the support for Neovim's terminal
 
 [logo]: screenshots/logo.png
 [screenshot_dark]: screenshots/dark-variation.png
