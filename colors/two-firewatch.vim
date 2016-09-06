@@ -292,7 +292,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorColumn', '',               s:syntax_cursor_line, '')
   call <sid>X('CursorLine',   '',               s:syntax_cursor_line, '')
   call <sid>X('Directory',    s:uno_1,          '',                   '')
-  call <sid>X('ErrorMsg',     s:syntax_accent,  s:syntax_bg,          'none')
+  call <sid>X('ErrorMsg',     s:syntax_color_removed,  s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
   call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
@@ -301,7 +301,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorLineNr', s:uno_2,          '',                   'none')
   call <sid>X('MatchParen',   s:syntax_bg,      s:syntax_accent,      '')
   call <sid>X('Italic',       '',               '',                   'italic')
-  call <sid>X('ModeMsg',      s:syntax_fg,      '',                   '')
+  call <sid>X('ModeMsg',      s:syntax_color_added,      '',                   '')
   call <sid>X('MoreMsg',      s:syntax_fg,      '',                   '')
   call <sid>X('NonText',      s:uno_4,          '',                   '')
   call <sid>X('PMenu',        '',               s:syntax_selection,   '')
@@ -459,7 +459,9 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('elixirInclude',           s:duo_2,         '', '')
   call <sid>X('elixirId',                s:uno_2,         '', '')
   call <sid>X('elixirModuleDeclaration', s:uno_1,         '', '')
+  call <sid>X('elixirModuleDefine',      s:duo_2,         '', '')
   call <sid>X('elixirOperator',          s:uno_3,         '', '')
+  call <sid>X('elixirSigil',             s:uno_4,         '', '')
   call <sid>X('elixirVariable',          s:duo_2,         '', '')
   " }}}
 
@@ -578,6 +580,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('markdownHeadingDelimiter', s:duo_3, '', '')
   call <sid>X('markdownListMarker',       s:duo_3, '', '')
 
+  call <sid>X('mkdCode',                  s:duo_1, '', '')
   call <sid>X('mkdDelimiter',             s:uno_3, '', '')
   call <sid>X('mkdLink',                  s:duo_1, '', '')
   call <sid>X('mkdLinkDef',               s:duo_1, '', '')
