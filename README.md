@@ -52,6 +52,10 @@ let g:airline_theme='twofirewatch' " if you have Airline installed and want the 
 
 If your environment supports italic, you can set `g:two_firewatch_italics=1` in your `vimrc`
 
+## iTerm2 Theme
+
+Can be found here, two flavours as well: [iTerm2 Two Firwatch theme](https://github.com/rakr/iterm-two-firewatch)
+
 ## Toggling background
 
 When you switch background, Vim reapplies the same colorscheme. The builtin Vim way is `:set bg=dark` or `:set bg=light`.
