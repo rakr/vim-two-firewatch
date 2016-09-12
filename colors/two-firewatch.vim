@@ -363,10 +363,10 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Keyword',        s:uno_1,                '',          '')
   call <sid>X('Exception',      s:uno_1,                '',          '')
   call <sid>X('PreProc',        s:uno_1,                '',          '')
-  call <sid>X('Include',        s:duo_2,                '',          '')
-  call <sid>X('Define',         s:duo_2,                '',          'none')
-  call <sid>X('Macro',          s:uno_3,                '',          '')
-  call <sid>X('PreCondit',      'ff0000',               '',          '')
+  "call <sid>X('Include',        s:duo_2,                '',          '')
+  "call <sid>X('Define',         s:duo_2,                '',          'none')
+  "call <sid>X('Macro',          s:uno_3,                '',          '')
+  "call <sid>X('PreCondit',      'ff0000',               '',          '')
   call <sid>X('Type',           s:duo_1,                '',          'none')
   call <sid>X('StorageClass',   s:duo_2,                '',          '')
   call <sid>X('Structure',      s:uno_1,                '',          '')
@@ -470,17 +470,17 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Elixir highlighting------------------------------------------------------{{{
-  call <sid>X('elixirAtom',              s:syntax_accent, '', '')
-  call <sid>X('elixirAlias',             s:duo_1,         '', '')
+  "call <sid>X('elixirAtom',              s:syntax_accent, '', '')
+  "call <sid>X('elixirAlias',             s:duo_1,         '', '')
   call <sid>X('elixirBlock',             s:uno_3,         '', '')
-  call <sid>X('elixirBlockDefinition',   s:duo_2,         '', '')
-  call <sid>X('elixirInclude',           s:duo_2,         '', '')
+  "call <sid>X('elixirBlockDefinition',   s:duo_2,         '', '')
+  "call <sid>X('elixirInclude',           s:duo_2,         '', '')
   call <sid>X('elixirId',                s:uno_2,         '', '')
   call <sid>X('elixirModuleDeclaration', s:uno_1,         '', '')
-  call <sid>X('elixirModuleDefine',      s:duo_2,         '', '')
-  call <sid>X('elixirOperator',          s:uno_3,         '', '')
-  call <sid>X('elixirSigil',             s:uno_4,         '', '')
-  call <sid>X('elixirVariable',          s:duo_2,         '', '')
+  "call <sid>X('elixirModuleDefine',      s:duo_2,         '', '')
+  "call <sid>X('elixirOperator',          s:uno_3,         '', '')
+  "call <sid>X('elixirSigil',             s:uno_4,         '', '')
+  "call <sid>X('elixirVariable',          s:duo_2,         '', '')
   " }}}
 
   " Go highlighting ---------------------------------------------------------{{{
@@ -673,19 +673,20 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('liquidKeyword',   s:uno_3, '', '')
   " }}}
 
+" Delete functions =========================================================={{{
+  delf <SID>X
+  delf <SID>rgb
+  delf <SID>color
+  delf <SID>rgb_color
+  delf <SID>rgb_level
+  delf <SID>rgb_number
+  delf <SID>grey_color
+  delf <SID>grey_level
+  delf <SID>grey_number
+"}}}
+
 endif
 "}}}
 
-" Delete functions =========================================================={{{
-delf <SID>X
-delf <SID>rgb
-delf <SID>color
-delf <SID>rgb_color
-delf <SID>rgb_level
-delf <SID>rgb_number
-delf <SID>grey_color
-delf <SID>grey_level
-delf <SID>grey_number
-"}}}
 
 " vim: set fdl=0 fdm=marker:
