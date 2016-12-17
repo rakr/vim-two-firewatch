@@ -70,6 +70,7 @@ This script has been extracted from the Solarized colorscheme and will allow you
 I would like to thank the following people for their contributions:
 
 * [Keremc](https://github.com/keremc), for adding the support for Neovim's terminal
+* [mcchrish](https://github.com/mcchrish), for the lightline theme
 
 [logo]: screenshots/logo.png
 [screenshot_dark]: screenshots/dark-variation.png
