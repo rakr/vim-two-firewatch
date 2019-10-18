@@ -255,11 +255,12 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_color_removed  = 'e05252'
 
     let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = 'FAF8F5' " 36°, 2%, 98%
+    let s:syntax_bg               = 'faf8f5' " 36°, 2%, 98%
     let s:syntax_accent           = s:uno_2
-    let s:syntax_selection        = 'E5DDCB' " 42°, 11%, 90%
+    let s:syntax_selection        = 'e6decf' " 40°, 10%, 90%
+    let s:syntax_signcolumn       = 'ebe7df' " 40°, 5%, 92%
     let s:syntax_fold_bg          = 'ccc5b8' " 40°, 10%, 80%
-    let s:syntax_cursor_line      = 'F3EFE7' " 40°, 5%, 95%
+    let s:syntax_cursor_line      = 'f3efe7' " 40°, 5%, 95%
   else
     let s:uno_1 = 'd6e9ff'
     let s:uno_2 = 'abb2bf'
@@ -279,6 +280,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_bg               = '282c34'
     let s:syntax_accent           = '56b6c2'
     let s:syntax_selection        = '3e4452'
+    let s:syntax_signcolumn       = s:uno_4
     let s:syntax_fold_bg          = '5c6370'
     let s:syntax_cursor_line      = '2c323c'
   endif
@@ -343,7 +345,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('TooLong',      s:syntax_accent,  '',                   '')
   call <sid>X('WildMenu',     s:syntax_fg,      s:uno_4,              '')
   call <sid>X('Normal',       s:syntax_fg,      s:syntax_bg,          '')
-  call <sid>X('SignColumn',   '',               s:uno_4,              '')
+  call <sid>X('SignColumn',   '',               s:syntax_signcolumn,  '')
   call <sid>X('Special',      s:duo_2,          '',                   '')
   " }}}
 
