@@ -235,6 +235,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   "}}}
 
   " Color definition --------------------------------------------------------{{{
+  " @see https://www.google.com/search?q=color+picker for conversion rgb->hsv
   if &background ==? 'light'
     " Blue.
     let s:uno_1 = '332405' " 40°, 90%, 20%
@@ -247,18 +248,18 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:duo_2 = '528fcc' " 210°, 60%, 80%
     let s:duo_3 = '919599' " 210°, 5%, 60%
 
+    " Diff.
     let s:syntax_color_renamed  = '33a0ff'
     let s:syntax_color_added    = '43d08a'
     let s:syntax_color_modified = 'e0c285'
     let s:syntax_color_removed  = 'e05252'
 
     let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = 'FAF8F5'
-    let s:syntax_accent           = '447EBB'
-    let s:syntax_gutter           = 'EAE1D2'
-    let s:syntax_selection        = 'E5DDCB'
-    let s:syntax_fold_bg          = 'd1cec7'
-    let s:syntax_cursor_line      = 'F3EFE7'
+    let s:syntax_bg               = 'FAF8F5' " 36°, 2%, 98%
+    let s:syntax_accent           = s:uno_2
+    let s:syntax_selection        = 'E5DDCB' " 42°, 11%, 90%
+    let s:syntax_fold_bg          = 'ccc5b8' " 40°, 10%, 80%
+    let s:syntax_cursor_line      = 'F3EFE7' " 40°, 5%, 95%
   else
     let s:uno_1 = 'd6e9ff'
     let s:uno_2 = 'abb2bf'
@@ -277,7 +278,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_fg               = s:uno_2
     let s:syntax_bg               = '282c34'
     let s:syntax_accent           = '56b6c2'
-    let s:syntax_gutter           = '636d83'
     let s:syntax_selection        = '3e4452'
     let s:syntax_fold_bg          = '5c6370'
     let s:syntax_cursor_line      = '2c323c'
@@ -312,7 +312,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorColumn', '',               s:syntax_cursor_line, '')
   call <sid>X('CursorLine',   '',               s:syntax_cursor_line, '')
   call <sid>X('Directory',    s:uno_1,          '',                   '')
-  call <sid>X('ErrorMsg',     s:syntax_color_removed,  s:syntax_bg,          'none')
+  call <sid>X('ErrorMsg',     s:syntax_color_removed,  s:syntax_bg,   'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
   call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
@@ -321,7 +321,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorLineNr', s:uno_2,          '',                   'none')
   call <sid>X('MatchParen',   s:syntax_accent,  s:syntax_bg,          '')
   call <sid>X('Italic',       '',               '',                   'italic')
-  call <sid>X('ModeMsg',      s:syntax_color_added,      '',                   '')
+  call <sid>X('ModeMsg',      s:syntax_color_added,      '',          '')
   call <sid>X('MoreMsg',      s:syntax_fg,      '',                   '')
   call <sid>X('NonText',      s:uno_4,          '',                   '')
   call <sid>X('PMenu',        '',               s:syntax_selection,   '')
