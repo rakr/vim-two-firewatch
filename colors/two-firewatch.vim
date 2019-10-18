@@ -236,11 +236,13 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
   " Color definition --------------------------------------------------------{{{
   if &background ==? 'light'
-    let s:uno_1 = '2d2006' " hsv 40 87 18
-    let s:uno_2 = '896724' " hsv 40 74 54
-    let s:uno_3 = 'B29762' " hsv 40 45 70
-    let s:uno_4 = 'b6ad9a' " hsv 41 14 71
+    " Blue.
+    let s:uno_1 = '332405' " 40°, 90%, 20%
+    let s:uno_2 = '8c6923' " 40°, 75%, 55%
+    let s:uno_3 = 'b29762' " 40°, 45%, 70%
+    let s:uno_4 = 'b3aa98' " 40°, 15%, 70%
 
+    " Orange.
     let s:duo_1 = '0f5499' " 210°, 90%, 50%
     let s:duo_2 = '528fcc' " 210°, 60%, 80%
     let s:duo_3 = '919599' " 210°, 5%, 60%
