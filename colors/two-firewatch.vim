@@ -266,12 +266,12 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_signcolumn       = 'ebe7df' " 40°, 5%, 92%
     let s:syntax_fold_bg          = 'ccc5b8' " 40°, 10%, 80%
     let s:syntax_cursor_line      = 'f3efe7' " 40°, 5%, 95%
-  else
+  else " Dark.
     " Bluish.
     let s:uno_1 = 'd6e9ff' " 212°, 16%, 100%
     let s:uno_2 = 'abb2bf' " 219°, 10%, 75%
     let s:uno_3 = '6e88a6' " 212°, 34%, 65%
-    let s:uno_4 = '55606d' " 213°, 22%, 43%
+    let s:uno_4 = '7a8799' " 215°, 20%, 70
 
     " Reddish.
     let s:duo_1 = 'c8ae9d' " 24°, 22%, 78%
@@ -286,7 +286,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
     let s:syntax_accent           = '56b6c2'
     let s:syntax_selection        = '3e4452'
-    let s:syntax_signcolumn       = s:uno_4
+    let s:syntax_signcolumn       = '55606d' " 213°, 22%, 43%
     let s:syntax_fold_bg          = '5c6370'
     let s:syntax_cursor_line      = '2c323c'
   endif
