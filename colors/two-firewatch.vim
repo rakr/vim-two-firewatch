@@ -306,8 +306,8 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   let g:terminal_color_13 = "#c678dd"
   let g:terminal_color_6 = "#56b6c2"
   let g:terminal_color_14 = "#56b6c2"
-  let g:terminal_color_7 = "#dcdfe4"
-  let g:terminal_color_15 = "#dcdfe4"
+  let g:terminal_color_7 = "#a1a7b3"
+  let g:terminal_color_15 = "#a1a7b3"
   " }}}
 
   "}}}
