@@ -235,6 +235,13 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   "}}}
 
   " Color definition --------------------------------------------------------{{{
+
+  " Diff colors.
+  let s:color_diff_change            = 'cdcdfd' " #cdcdfd
+  let s:color_diff_delete            = 'ffcddc' " #ffcddc
+  let s:color_diff_add               = 'c9e6c9' " #c9e6c9
+  let s:color_diff_text              = 'b6f2b6' " #b6f2b6
+
   " @see https://www.google.com/search?q=color+picker for conversion rgb->hsv
   if &background ==? 'light'
     " Orange.
@@ -248,14 +255,14 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:duo_2 = '528fcc' " 210°, 60%, 80%
     let s:duo_3 = '919599' " 210°, 5%, 60%
 
-    " Diff.
-    let s:syntax_color_renamed  = '33a0ff'
-    let s:syntax_color_added    = '43d08a'
-    let s:syntax_color_modified = 'e0c285'
-    let s:syntax_color_removed  = 'e05252'
-
+    "
     let s:syntax_fg               = s:uno_2
     let s:syntax_bg               = 'faf8f5' " 36°, 2%, 98%
+
+    "
+    let s:syntax_todo             = 'add9ad' " 120°, 20%, 85%
+    let s:syntax_error            = 'cc7a7a' " 0°, 40%, 80%
+
     let s:syntax_accent           = s:uno_2
     let s:syntax_selection        = 'e6decf' " 40°, 10%, 90%
     let s:syntax_signcolumn       = 'ebe7df' " 40°, 5%, 92%
@@ -271,13 +278,13 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:duo_2 = 'e06c75'
     let s:duo_3 = 'dd672c'
 
-    let s:syntax_color_renamed  = '33a0ff'
-    let s:syntax_color_added    = '43d08a'
-    let s:syntax_color_modified = 'e0c285'
-    let s:syntax_color_removed  = 'e05252'
-
     let s:syntax_fg               = s:uno_2
     let s:syntax_bg               = '282c34'
+
+    "
+    let s:syntax_todo             = s:color_diff_add
+    let s:syntax_error            = 'cc3d3d'
+
     let s:syntax_accent           = '56b6c2'
     let s:syntax_selection        = '3e4452'
     let s:syntax_signcolumn       = s:uno_4
@@ -314,7 +321,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorColumn', '',               s:syntax_cursor_line, '')
   call <sid>X('CursorLine',   '',               s:syntax_cursor_line, '')
   call <sid>X('Directory',    s:uno_1,          '',                   '')
-  call <sid>X('ErrorMsg',     s:syntax_color_removed,  s:syntax_bg,   'none')
+  call <sid>X('ErrorMsg',     s:syntax_error,   s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
   call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
@@ -323,7 +330,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorLineNr', s:uno_2,          '',                   'none')
   call <sid>X('MatchParen',   s:syntax_accent,  s:syntax_bg,          '')
   call <sid>X('Italic',       '',               '',                   'italic')
-  call <sid>X('ModeMsg',      s:syntax_color_added,      '',          '')
+  call <sid>X('ModeMsg',      s:color_diff_add, '',                   '')
   call <sid>X('MoreMsg',      s:syntax_fg,      '',                   '')
   call <sid>X('NonText',      s:uno_4,          '',                   '')
   call <sid>X('PMenu',        '',               s:syntax_selection,   '')
@@ -383,8 +390,8 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Debug',          '',                     '',          '')
   call <sid>X('Underlined',     s:duo_1,                '',          'underline')
   call <sid>X('Ignore',         '',                     '',          '')
-  call <sid>X('Error',          s:syntax_color_removed, s:syntax_bg, 'bold')
-  call <sid>X('Todo',           s:syntax_color_added,   s:syntax_bg, '')
+  call <sid>X('Error',          s:syntax_error,         s:syntax_bg, 'bold')
+  call <sid>X('Todo',           s:syntax_todo,          s:syntax_bg, 'bold')
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
@@ -407,15 +414,10 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
-  call <sid>X('DiffAdd',     s:syntax_color_added,    s:syntax_selection, '')
-  call <sid>X('DiffChange',  s:syntax_color_modified, s:syntax_selection, '')
-  call <sid>X('DiffDelete',  s:syntax_color_removed,  s:syntax_selection, '')
-  call <sid>X('DiffText',    s:uno_2,                 s:syntax_selection, '')
-  call <sid>X('DiffAdded',   s:duo_2,                 s:syntax_selection, '')
-  call <sid>X('DiffFile',    s:syntax_accent,         s:syntax_selection, '')
-  call <sid>X('DiffNewFile', s:duo_2,                 s:syntax_selection, '')
-  call <sid>X('DiffLine',    s:uno_2,                 s:syntax_selection, '')
-  call <sid>X('DiffRemoved', s:syntax_accent,         s:syntax_selection, '')
+  call <sid>X('DiffAdd',     '000000', s:color_diff_add,    '')
+  call <sid>X('DiffChange',  '000000', s:color_diff_change, '')
+  call <sid>X('DiffDelete',  '000000', s:color_diff_delete, '')
+  call <sid>X('DiffText',    '000000', s:color_diff_text,   '')
   " }}}
 
   " C/C++ and other languages like that -------------------------------------{{{
