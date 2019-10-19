@@ -259,8 +259,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_fg               = s:uno_2
     let s:syntax_bg               = 'faf8f5' " 36°, 2%, 98%
 
-    "
-    let s:syntax_todo             = 'add9ad' " 120°, 20%, 85%
     let s:syntax_error            = 'cc7a7a' " 0°, 40%, 80%
 
     let s:syntax_accent           = s:uno_2
@@ -282,7 +280,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_bg               = '282c34'
 
     "
-    let s:syntax_todo             = s:color_diff_add
     let s:syntax_error            = 'cc3d3d'
 
     let s:syntax_accent           = '56b6c2'
@@ -391,7 +388,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Underlined',     s:duo_1,                '',          'underline')
   call <sid>X('Ignore',         '',                     '',          '')
   call <sid>X('Error',          s:syntax_error,         s:syntax_bg, 'bold')
-  call <sid>X('Todo',           s:syntax_todo,          s:syntax_bg, 'bold')
+  call <sid>X('Todo',           s:duo_1,                s:syntax_bg, '')
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
