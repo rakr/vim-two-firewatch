@@ -267,17 +267,19 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_fold_bg          = 'ccc5b8' " 40°, 10%, 80%
     let s:syntax_cursor_line      = 'f3efe7' " 40°, 5%, 95%
   else
-    let s:uno_1 = 'd6e9ff'
-    let s:uno_2 = 'abb2bf'
-    let s:uno_3 = '6e88a6'
-    let s:uno_4 = '55606d'
+    " Bluish.
+    let s:uno_1 = 'd6e9ff' " 212°, 16%, 100%
+    let s:uno_2 = 'abb2bf' " 219°, 10%, 75%
+    let s:uno_3 = '6e88a6' " 212°, 34%, 65%
+    let s:uno_4 = '55606d' " 213°, 22%, 43%
 
-    let s:duo_1 = 'c8ae9d'
-    let s:duo_2 = 'e06c75'
-    let s:duo_3 = 'dd672c'
+    " Reddish.
+    let s:duo_1 = 'c8ae9d' " 24°, 22%, 78%
+    let s:duo_2 = 'e06c75' " 355°, 52%, 88%
+    let s:duo_3 = 'dd672c' " 20°, 80%, 87%
 
     let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = '282c34'
+    let s:syntax_bg               = '23272e' " 218°, 24%, 18%
 
     "
     let s:syntax_error            = 'cc3d3d'
@@ -289,7 +291,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     let s:syntax_cursor_line      = '2c323c'
   endif
 
-  " neovim :terminal colors
+  " neovim :terminal colors {{{
   let g:terminal_color_0 = "#282c34"
   let g:terminal_color_8 = "#282c34"
   let g:terminal_color_1 = "#e06c75"
@@ -306,6 +308,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   let g:terminal_color_14 = "#56b6c2"
   let g:terminal_color_7 = "#dcdfe4"
   let g:terminal_color_15 = "#dcdfe4"
+  " }}}
 
   "}}}
 
