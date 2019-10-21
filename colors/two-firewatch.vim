@@ -16,23 +16,23 @@ if !exists('g:two_firewatch_italics')
   let g:two_firewatch_italics = 0
 endif
 
-  " sets the highlighting for the given group
-  fun <SID>X(group, fg, bg, attr)
-    let l:attr = a:attr
-    if g:two_firewatch_italics == 0 && l:attr ==? 'italic'
-      let l:attr = 'none'
-    endif
+" sets the highlighting for the given group
+fun <SID>X(group, fg, bg, attr)
+  let l:attr = a:attr
+  if g:two_firewatch_italics == 0 && l:attr ==? 'italic'
+    let l:attr = 'none'
+  endif
 
-    if a:fg !=? ''
-      exec 'hi ' . a:group . ' guifg=#' . a:fg
-    endif
-    if a:bg !=? ''
-      exec 'hi ' . a:group . ' guibg=#' . a:bg
-    endif
-    if a:attr !=? ''
-      exec 'hi ' . a:group . ' gui=' . l:attr
-    endif
-  endfun
+  if a:fg !=? ''
+    exec 'hi ' . a:group . ' guifg=#' . a:fg
+  endif
+  if a:bg !=? ''
+    exec 'hi ' . a:group . ' guibg=#' . a:bg
+  endif
+  if a:attr !=? ''
+    exec 'hi ' . a:group . ' gui=' . l:attr
+  endif
+endfun
 
 "}}}
 
