@@ -20,43 +20,89 @@ endif
 " https://github.com/norcalli/nvim-colorizer.lua/blob/master/lua/colorizer.lua#L145
 
 function! HueToRGB(p, q, t)
-  if (a:t < 0)
-    let a:t = a:t + 1
+  let l:t = a:t
+
+  if (l:t < 0)
+    let l:t = l:t + 1
   endif
-  if (a:t > 1)
-    let a:t = a:t - 1
+  if (l:t > 1)
+    let l:t = l:t - 1
   endif
-  if (a:t < 1/6)
-    return a:p + (a:q - a:p) * 6 * t
+  if (l:t < 1.0 / 6)
+    return a:p + (a:q - a:p) * 6 * l:t
   endif
-  if (a:t < 1/2)
+  if (l:t < 1.0 / 2)
     return a:q
   endif
-  if (a:t < 2/3)
-    return a:p + (a:q - a:p) * (2/3 - a:t) * 6
+  if (l:t < 2.0 / 3)
+    return a:p + (a:q - a:p) * (4 - l:t * 6)
   endif
   return a:p
 endfunction
 
-function HSLtoRGB(h, s, l)
+function! HSLtoRGB(h, s, l)
 	if (a:h > 1 || a:s > 1 || a:l > 1)
-    return end
+    return [0, 0, 0]
   endif
 	if (a:s == 0)
 		let l:r = a:l * 255
-		return l:r, l:r, l:r
+		return [l:r, l:r, l:r]
 	endif
 
-	if (l < 0.5)
+  let l:q = 0
+
+	if (a:l < 0.5)
 		let l:q = a:l * (1 + a:s)
 	else
 		let l:q = a:l + a:s - a:l * a:s
 	endif
   let l:p = 2 * a:l - l:q
-	return 255*a:hue_to_rgb(l:p, l:q, a:h + 1/3), 255*a:hue_to_rgb(l:p, l:q, a:h), 255*a:hue_to_rgb(l:p, l:q, a:h - 1/3)
+	return [
+        \ 255 * HueToRGB(l:p, l:q, a:h + 1.0 / 3),
+        \ 255 * HueToRGB(l:p, l:q, a:h),
+        \ 255 * HueToRGB(l:p, l:q, a:h - 1.0 / 3)]
 endfunction
 
-" hsl(0,90%,90%);
+function! Dec2hex(x)
+  let l:d = {
+    \ 10: 'a',
+    \ 11: 'b',
+    \ 12: 'c',
+    \ 13: 'd',
+    \ 14: 'e',
+    \ 15: 'f'
+  \ }
+
+  let l:d1 = float2nr(a:x) / 16
+  let l:d2 = float2nr(a:x) % 16
+
+  let l:d1 = get(l:d, l:d1, l:d1)
+  let l:d2 = get(l:d, l:d2, l:d2)
+
+  return l:d1 . l:d2
+endfunction
+
+function ParseHsl(s)
+  let l:_ = a:s
+  let l:_ = substitute(l:_, 'hsl(', '[', '')
+  let l:_ = substitute(l:_, ')',    ']', '')
+  let l:_ = substitute(l:_, '%',    '',  'g')
+  let l:_ = eval(l:_)
+  let [l:h, l:s, l:l] = [
+    \ l:_[0] * 1.0 / 360,
+    \ l:_[1] * 1.0 / 255,
+    \ l:_[2] * 1.0 / 255]
+  return [l:h, l:s, l:l]
+endfunction
+
+function! Hsl(cssfn)
+  let [l:h, l:s, l:l] = ParseHsl(a:cssfn)
+  let [d1, d2, d3] = HSLtoRGB(l:h, l:s, l:l)
+  return Dec2hex(d1) . Dec2hex(d2) . Dec2hex(d3)
+endfunction
+
+
+" hsl(0, 70%, 40%);
 
 " sets the highlighting for the given group
 fun <SID>X(group, fg, bg, attr)
