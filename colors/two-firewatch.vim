@@ -16,10 +16,6 @@ if !exists('g:two_firewatch_italics')
   let g:two_firewatch_italics = 0
 endif
 
-if has('gui_running') || &t_Co == 88 || &t_Co == 256
-  " functions
-  " returns an approximate grey index for the given grey level
-
   " sets the highlighting for the given group
   fun <SID>X(group, fg, bg, attr)
     let l:attr = a:attr
@@ -38,7 +34,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
     endif
   endfun
 
-  "}}}
+"}}}
 
   " Color definition --------------------------------------------------------{{{
 
@@ -116,7 +112,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   let g:terminal_color_15 = "#a1a7b3"
   " }}}
 
-  "}}}
+"}}} color definition
 
   " Vim editor color --------------------------------------------------------{{{
   call <sid>X('bold',         '',               '',                   'bold')
@@ -488,9 +484,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
 " Delete functions =========================================================={{{
   delf <SID>X
-"}}}
-
-endif
 "}}}
 
 
