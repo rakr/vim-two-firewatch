@@ -16,7 +16,7 @@ if !exists('g:two_firewatch_italics')
   let g:two_firewatch_italics = 0
 endif
 
-" Converting Colors.
+" Converting Colors. {{{
 " https://github.com/norcalli/nvim-colorizer.lua/blob/master/lua/colorizer.lua#L145
 
 function! HueToRGB(p, q, t)
@@ -101,8 +101,8 @@ function! Hsl(cssfn)
   return Dec2hex(d1) . Dec2hex(d2) . Dec2hex(d3)
 endfunction
 
-
 " hsl(0, 70%, 40%);
+"}}} parse colors
 
 " sets the highlighting for the given group
 fun <SID>X(group, fg, bg, attr)
@@ -112,10 +112,10 @@ fun <SID>X(group, fg, bg, attr)
   endif
 
   if a:fg !=? ''
-    exec 'hi ' . a:group . ' guifg=#' . a:fg
+    exec 'hi ' . a:group . ' guifg=' . a:fg
   endif
   if a:bg !=? ''
-    exec 'hi ' . a:group . ' guibg=#' . a:bg
+    exec 'hi ' . a:group . ' guibg=' . a:bg
   endif
   if a:attr !=? ''
     exec 'hi ' . a:group . ' gui=' . l:attr
@@ -127,76 +127,76 @@ endfun
   " Color definition --------------------------------------------------------{{{
 
   " Diff colors.
-  let s:color_diff_change            = 'cdcdfd' " #cdcdfd
-  let s:color_diff_delete            = 'ffcddc' " #ffcddc
-  let s:color_diff_add               = 'c9e6c9' " #c9e6c9
-  let s:color_diff_text              = 'b6f2b6' " #b6f2b6
+  let s:color_diff_change            = '#cdcdfd'
+  let s:color_diff_delete            = '#ffcddc'
+  let s:color_diff_add               = '#c9e6c9'
+  let s:color_diff_text              = '#b6f2b6'
 
   " @see https://www.google.com/search?q=color+picker for conversion rgb->hsv
   if &background ==? 'light'
-    " Orange.
-    let s:uno_1 = '332405' " 40°, 90%, 20%
-    let s:uno_2 = '8c6923' " 40°, 75%, 55%
-    let s:uno_3 = 'b29762' " 40°, 45%, 70%
-    let s:uno_4 = '998f7a' " 40°, 20%, 60%
+    " First color.
+    let s:uno_1 = '#332405' " 40°, 90%, 20%
+    let s:uno_2 = '#8c6923' " 40°, 75%, 55%
+    let s:uno_3 = '#b29762' " 40°, 45%, 70%
+    let s:uno_4 = '#998f7a' " 40°, 20%, 60%
 
-    " Blue.
-    let s:duo_1 = '0f5499' " 210°, 90%, 50%
-    let s:duo_2 = '528fcc' " 210°, 60%, 80%
-    let s:duo_3 = '919599' " 210°, 5%, 60%
+    " Second color.
+    let s:duo_1 = '#0f5499' " 210°, 90%, 50%
+    let s:duo_2 = '#528fcc' " 210°, 60%, 80%
+    let s:duo_3 = '#919599' " 210°,  5%, 60%
 
     "
     let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = 'faf8f5' " 36°, 2%, 98%
+    let s:syntax_bg               = '#faf8f5' " 36°, 2%, 98%
 
-    let s:syntax_error            = 'cc7a7a' " 0°, 40%, 80%
+    let s:syntax_error            = '#cc7a7a' " 0°, 40%, 80%
 
     let s:syntax_accent           = s:uno_2
-    let s:syntax_selection        = 'e6decf' " 40°, 10%, 90%
-    let s:syntax_signcolumn       = 'ebe7df' " 40°, 5%, 92%
-    let s:syntax_fold_bg          = 'ccc5b8' " 40°, 10%, 80%
-    let s:syntax_cursor_line      = 'f3efe7' " 40°, 5%, 95%
+    let s:syntax_selection        = '#e6decf' " 40°, 10%, 90%
+    let s:syntax_signcolumn       = '#ebe7df' " 40°, 5%, 92%
+    let s:syntax_fold_bg          = '#ccc5b8' " 40°, 10%, 80%
+    let s:syntax_cursor_line      = '#f3efe7' " 40°, 5%, 95%
   else " Dark.
-    " Bluish.
-    let s:uno_1 = 'd6e9ff' " 212°, 16%, 100%
-    let s:uno_2 = 'abb2bf' " 219°, 10%, 75%
-    let s:uno_3 = '6e88a6' " 212°, 34%, 65%
-    let s:uno_4 = '7a8799' " 215°, 20%, 70
+    " First color.
+    let s:uno_1 = '#d6e9ff' " 212°, 16%, 100%
+    let s:uno_2 = '#abb2bf' " 219°, 10%, 75%
+    let s:uno_3 = '#6e88a6' " 212°, 34%, 65%
+    let s:uno_4 = '#7a8799' " 215°, 20%, 70
 
-    " Reddish.
-    let s:duo_1 = 'c8ae9d' " 24°, 22%, 78%
-    let s:duo_2 = 'e06c75' " 355°, 52%, 88%
-    let s:duo_3 = 'dd672c' " 20°, 80%, 87%
+    " Second color.
+    let s:duo_1 = '#c8ae9d' " 24°, 22%, 78%
+    let s:duo_2 = '#e06c75' " 355°, 52%, 88%
+    let s:duo_3 = '#dd672c' " 20°, 80%, 87%
 
     let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = '23272e' " 218°, 24%, 18%
+    let s:syntax_bg               = '#23272e' " 218°, 24%, 18%
 
     "
-    let s:syntax_error            = 'cc3d3d'
+    let s:syntax_error            = '#cc3d3d'
 
-    let s:syntax_accent           = '56b6c2'
-    let s:syntax_selection        = '3e4452'
-    let s:syntax_signcolumn       = '55606d' " 213°, 22%, 43%
-    let s:syntax_fold_bg          = '5c6370'
-    let s:syntax_cursor_line      = '2c323c'
+    let s:syntax_accent           = '#56b6c2'
+    let s:syntax_selection        = '#3e4452'
+    let s:syntax_signcolumn       = '#55606d' " 213°, 22%, 43%
+    let s:syntax_fold_bg          = '#5c6370'
+    let s:syntax_cursor_line      = '#2c323c'
   endif
 
   " neovim :terminal colors {{{
-  let g:terminal_color_0 = "#282c34"
-  let g:terminal_color_8 = "#282c34"
-  let g:terminal_color_1 = "#e06c75"
-  let g:terminal_color_9 = "#e06c75"
-  let g:terminal_color_2 = "#98c379"
+  let g:terminal_color_0  = "#282c34"
+  let g:terminal_color_8  = "#282c34"
+  let g:terminal_color_1  = "#e06c75"
+  let g:terminal_color_9  = "#e06c75"
+  let g:terminal_color_2  = "#98c379"
   let g:terminal_color_10 = "#98c379"
-  let g:terminal_color_3 = "#e5c07b"
+  let g:terminal_color_3  = "#e5c07b"
   let g:terminal_color_11 = "#e5c07b"
-  let g:terminal_color_4 = "#61afef"
+  let g:terminal_color_4  = "#61afef"
   let g:terminal_color_12 = "#61afef"
-  let g:terminal_color_5 = "#c678dd"
+  let g:terminal_color_5  = "#c678dd"
   let g:terminal_color_13 = "#c678dd"
-  let g:terminal_color_6 = "#56b6c2"
+  let g:terminal_color_6  = "#56b6c2"
   let g:terminal_color_14 = "#56b6c2"
-  let g:terminal_color_7 = "#a1a7b3"
+  let g:terminal_color_7  = "#a1a7b3"
   let g:terminal_color_15 = "#a1a7b3"
   " }}}
 
