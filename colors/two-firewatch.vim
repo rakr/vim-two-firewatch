@@ -333,6 +333,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('ModeMsg',      s:color_diff_add, '',                   '')
   call <sid>X('MoreMsg',      s:syntax_fg,      '',                   '')
   call <sid>X('NonText',      s:syntax_signcolumn, '',                '')
+  call <sid>X('EndOfBuffer',  s:syntax_bg,      '',                   '')
   call <sid>X('PMenu',        '',               s:syntax_selection,   '')
   call <sid>X('PMenuSel',     '',               s:syntax_bg,          '')
   call <sid>X('PMenuSbar',    '',               s:syntax_bg,          '')
