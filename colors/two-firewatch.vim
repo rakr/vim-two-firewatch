@@ -35,7 +35,7 @@ function! HueToRGB(p, q, t)
     return a:q
   endif
   if (l:t < 2.0 / 3)
-    return a:p + (a:q - a:p) * (4 - l:t * 6)
+    return a:p + (a:q - a:p) * (2.0 / 3 - l:t) * 6
   endif
   return a:p
 endfunction
@@ -90,8 +90,8 @@ function ParseHsl(s)
   let l:_ = eval(l:_)
   let [l:h, l:s, l:l] = [
     \ l:_[0] * 1.0 / 360,
-    \ l:_[1] * 1.0 / 255,
-    \ l:_[2] * 1.0 / 255]
+    \ l:_[1] * 1.0 / 100,
+    \ l:_[2] * 1.0 / 100]
   return [l:h, l:s, l:l]
 endfunction
 
@@ -182,8 +182,8 @@ endfun
   endif
 
   " neovim :terminal colors {{{
-  let g:terminal_color_0  = "#282c34"
-  let g:terminal_color_8  = "#282c34"
+  let g:terminal_color_0  = ""
+  let g:terminal_color_8  = ""
   let g:terminal_color_1  = "#e06c75"
   let g:terminal_color_9  = "#e06c75"
   let g:terminal_color_2  = "#98c379"
@@ -196,8 +196,20 @@ endfun
   let g:terminal_color_13 = "#c678dd"
   let g:terminal_color_6  = "#56b6c2"
   let g:terminal_color_14 = "#56b6c2"
-  let g:terminal_color_7  = "#a1a7b3"
-  let g:terminal_color_15 = "#a1a7b3"
+  let g:terminal_color_7  = ""
+  let g:terminal_color_15 = ""
+
+  if &background ==? 'light'
+    let g:terminal_color_0  = "#282c34"
+    let g:terminal_color_8  = "#4d4d4d"
+    let g:terminal_color_7  = "#737780"
+    let g:terminal_color_15 = "#a1a7b3"
+  else " Dark
+    let g:terminal_color_0  = "#000000"
+    let g:terminal_color_8  = "#4d4d4d"
+    let g:terminal_color_7  = "#737780"
+    let g:terminal_color_15 = "#a1a7b3"
+  endif
   " }}}
 
 "}}} color definition
