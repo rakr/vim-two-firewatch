@@ -134,6 +134,7 @@ endfun
 
   " @see https://www.google.com/search?q=color+picker for conversion rgb->hsv
   if &background ==? 'light'
+    " {{{ Light
     " First color.
     let s:uno_1 = '#332405' " 40°, 90%, 20%
     let s:uno_2 = '#8c6923' " 40°, 75%, 55%
@@ -156,7 +157,9 @@ endfun
     let s:syntax_signcolumn       = '#ebe7df' " 40°, 5%, 92%
     let s:syntax_fold_bg          = '#ccc5b8' " 40°, 10%, 80%
     let s:syntax_cursor_line      = '#f3efe7' " 40°, 5%, 95%
-  else " Dark.
+    " }}}
+  else
+    " {{{ Dark
     " First color.
     let s:uno_1 = '#d6e9ff' " 212°, 16%, 100%
     let s:uno_2 = '#abb2bf' " 219°, 10%, 75%
@@ -179,9 +182,10 @@ endfun
     let s:syntax_signcolumn       = '#55606d' " 213°, 22%, 43%
     let s:syntax_fold_bg          = '#5c6370'
     let s:syntax_cursor_line      = '#2c323c'
+    " }}}
   endif
 
-  " neovim :terminal colors {{{
+  " Terminal colors {{{
   let g:terminal_color_0  = ""
   let g:terminal_color_8  = ""
   let g:terminal_color_1  = "#e06c75"
