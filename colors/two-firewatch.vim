@@ -325,6 +325,10 @@ endfun
   call <sid>X('DiffChange',  '000000', s:color_diff_change, '')
   call <sid>X('DiffDelete',  '000000', s:color_diff_delete, '')
   call <sid>X('DiffText',    '000000', s:color_diff_text,   '')
+
+  " fugitive.vim
+  call <sid>X('diffAdded',   g:terminal_color_2,      '', '')
+  call <sid>X('diffRemoved', g:terminal_color_1,   '', '')
   " }}}
 
   " C/C++ and other languages like that -------------------------------------{{{
@@ -427,8 +431,6 @@ endfun
   hi link GitGutterAdd    SignifySignAdd
   hi link GitGutterChange SignifySignChange
   hi link GitGutterDelete SignifySignDelete
-  call <sid>X('diffAdded',   s:duo_2,         '', '')
-  call <sid>X('diffRemoved', s:syntax_accent, '', '')
   " }}}
 
   " HTML highlighting -------------------------------------------------------{{{
