@@ -1,14 +1,27 @@
 if exists('g:lightline')
   
-  let s:bg = '#282c34'
-  let s:fg = '#abb2bf'
-  let s:gray1 = '#3e4452'
-  let s:gray2 = '#2c323c'
-  let s:gray3 = '#55606d'
-  let s:green = '#43d08a'
-  let s:red = '#e05252'
-  let s:red2 = '#e06c75'
-  let s:orange = '#c8ae9d'
+  if &background ==? 'light'
+    let s:bg = '#faf8f5'
+    let s:fg = '#896724'
+    let s:gray1 = '#e5ddcb'
+    let s:gray2 = '#f3efe7'
+    let s:gray3 = '#B6ad9a'
+    let s:green = '#43d08a'
+    let s:red = '#e05252'
+    let s:red2 = '#718ecd'
+    let s:orange = '#065289'
+  else
+    let s:bg = '#282c34'
+    let s:fg = '#abb2bf'
+    let s:gray1 = '#3e4452'
+    let s:gray2 = '#2c323c'
+    let s:gray3 = '#55606d'
+    let s:green = '#43d08a'
+    let s:red = '#e05252'
+    let s:red2 = '#e06c75'
+    let s:orange = '#c8ae9d'
+  endif
+
 
   let s:p = {'normal':{}, 'inactive':{}, 'insert':{}, 'replace':{}, 'visual':{}, 'tabline':{}}
   let s:p.normal.left = [ [ s:bg, s:green, 'bold' ], [ s:fg, s:gray1 ] ]
