@@ -2,6 +2,7 @@
 " Author:  Ramzi Akremi
 " License: MIT
 " Version: 1.0.0
+scriptencoding utf-8
 
 " Global setup =============================================================={{{
 
@@ -186,33 +187,33 @@ endfun
   endif
 
   " Terminal colors {{{
-  let g:terminal_color_0  = ""
-  let g:terminal_color_8  = ""
-  let g:terminal_color_1  = "#e06c75"
-  let g:terminal_color_9  = "#e06c75"
-  let g:terminal_color_2  = "#98c379"
-  let g:terminal_color_10 = "#98c379"
-  let g:terminal_color_3  = "#e5c07b"
-  let g:terminal_color_11 = "#e5c07b"
-  let g:terminal_color_4  = "#61afef"
-  let g:terminal_color_12 = "#61afef"
-  let g:terminal_color_5  = "#c678dd"
-  let g:terminal_color_13 = "#c678dd"
-  let g:terminal_color_6  = "#56b6c2"
-  let g:terminal_color_14 = "#56b6c2"
-  let g:terminal_color_7  = ""
-  let g:terminal_color_15 = ""
+  let g:terminal_color_0  = ''
+  let g:terminal_color_8  = ''
+  let g:terminal_color_1  = '#e06c75'
+  let g:terminal_color_9  = '#e06c75'
+  let g:terminal_color_2  = '#98c379'
+  let g:terminal_color_10 = '#98c379'
+  let g:terminal_color_3  = '#e5c07b'
+  let g:terminal_color_11 = '#e5c07b'
+  let g:terminal_color_4  = '#61afef'
+  let g:terminal_color_12 = '#61afef'
+  let g:terminal_color_5  = '#c678dd'
+  let g:terminal_color_13 = '#c678dd'
+  let g:terminal_color_6  = '#56b6c2'
+  let g:terminal_color_14 = '#56b6c2'
+  let g:terminal_color_7  = ''
+  let g:terminal_color_15 = ''
 
   if &background ==? 'light'
-    let g:terminal_color_0  = "#282c34"
-    let g:terminal_color_8  = "#4d4d4d"
-    let g:terminal_color_7  = "#737780"
-    let g:terminal_color_15 = "#a1a7b3"
+    let g:terminal_color_0  = '#282c34'
+    let g:terminal_color_8  = '#4d4d4d'
+    let g:terminal_color_7  = '#737780'
+    let g:terminal_color_15 = '#a1a7b3'
   else " Dark
-    let g:terminal_color_0  = "#000000"
-    let g:terminal_color_8  = "#4d4d4d"
-    let g:terminal_color_7  = "#737780"
-    let g:terminal_color_15 = "#a1a7b3"
+    let g:terminal_color_0  = '#000000'
+    let g:terminal_color_8  = '#4d4d4d'
+    let g:terminal_color_7  = '#737780'
+    let g:terminal_color_15 = '#a1a7b3'
   endif
   " }}}
 
