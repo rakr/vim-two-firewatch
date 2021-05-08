@@ -219,6 +219,7 @@ endfun
 "}}} color definition
 
   " Vim editor color --------------------------------------------------------{{{
+  "            group          fg                bg                    attr
   call <sid>X('bold',         '',               '',                   'bold')
   call <sid>X('ColorColumn',  '',               s:syntax_cursor_line, '')
   call <sid>X('Conceal',      '',               '',                   '')
@@ -229,7 +230,7 @@ endfun
   call <sid>X('Directory',    s:uno_1,          '',                   '')
   call <sid>X('ErrorMsg',     s:syntax_error,   s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
-  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
+  call <sid>X('Folded',       s:uno_1,          s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
   call <sid>X('IncSearch',    s:syntax_bg,      s:uno_4,              '')
   call <sid>X('LineNr',       s:syntax_fold_bg, '',                   '')
