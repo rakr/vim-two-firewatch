@@ -2,306 +2,225 @@
 " Author:  Ramzi Akremi
 " License: MIT
 " Version: 1.0.0
+scriptencoding utf-8
 
 " Global setup =============================================================={{{
 
 hi clear
 syntax reset
-"if exists('g:colors_name')
-  "unlet g:colors_name
-"endif
+
+" To switch properly between light and dark.
 let g:colors_name = 'two-firewatch'
 
+" Default options.
 if !exists('g:two_firewatch_italics')
   let g:two_firewatch_italics = 0
 endif
 
-if has('gui_running') || &t_Co == 88 || &t_Co == 256
-  " functions
-  " returns an approximate grey index for the given grey level
+" Converting Colors. {{{
+" https://github.com/norcalli/nvim-colorizer.lua/blob/master/lua/colorizer.lua#L145
 
-  " Utility functions -------------------------------------------------------{{{
-  fun <SID>grey_number(x)
-    if &t_Co == 88
-      if a:x < 23
-        return 0
-      elseif a:x < 69
-        return 1
-      elseif a:x < 103
-        return 2
-      elseif a:x < 127
-        return 3
-      elseif a:x < 150
-        return 4
-      elseif a:x < 173
-        return 5
-      elseif a:x < 196
-        return 6
-      elseif a:x < 219
-        return 7
-      elseif a:x < 243
-        return 8
-      else
-        return 9
-      endif
-    else
-      if a:x < 14
-        return 0
-      else
-        let l:n = (a:x - 8) / 10
-        let l:m = (a:x - 8) % 10
-        if l:m < 5
-          return l:n
-        else
-          return l:n + 1
-        endif
-      endif
-    endif
-  endfun
+function! HueToRGB(p, q, t)
+  let l:t = a:t
 
-  " returns the actual grey level represented by the grey index
-  fun <SID>grey_level(n)
-    if &t_Co == 88
-      if a:n == 0
-        return 0
-      elseif a:n == 1
-        return 46
-      elseif a:n == 2
-        return 92
-      elseif a:n == 3
-        return 115
-      elseif a:n == 4
-        return 139
-      elseif a:n == 5
-        return 162
-      elseif a:n == 6
-        return 185
-      elseif a:n == 7
-        return 208
-      elseif a:n == 8
-        return 231
-      else
-        return 255
-      endif
-    else
-      if a:n == 0
-        return 0
-      else
-        return 8 + (a:n * 10)
-      endif
-    endif
-  endfun
+  if (l:t < 0)
+    let l:t = l:t + 1
+  endif
+  if (l:t > 1)
+    let l:t = l:t - 1
+  endif
+  if (l:t < 1.0 / 6)
+    return a:p + (a:q - a:p) * 6 * l:t
+  endif
+  if (l:t < 1.0 / 2)
+    return a:q
+  endif
+  if (l:t < 2.0 / 3)
+    return a:p + (a:q - a:p) * (2.0 / 3 - l:t) * 6
+  endif
+  return a:p
+endfunction
 
-  " returns the palette index for the given grey index
-  fun <SID>grey_color(n)
-    if &t_Co == 88
-      if a:n == 0
-        return 16
-      elseif a:n == 9
-        return 79
-      else
-        return 79 + a:n
-      endif
-    else
-      if a:n == 0
-        return 16
-      elseif a:n == 25
-        return 231
-      else
-        return 231 + a:n
-      endif
-    endif
-  endfun
+function! HSLtoRGB(h, s, l)
+	if (a:h > 1 || a:s > 1 || a:l > 1)
+    return [0, 0, 0]
+  endif
+	if (a:s == 0)
+		let l:r = a:l * 255
+		return [l:r, l:r, l:r]
+	endif
 
-  " returns an approximate color index for the given color level
-  fun <SID>rgb_number(x)
-    if &t_Co == 88
-      if a:x < 69
-        return 0
-      elseif a:x < 172
-        return 1
-      elseif a:x < 230
-        return 2
-      else
-        return 3
-      endif
-    else
-      if a:x < 75
-        return 0
-      else
-        let l:n = (a:x - 55) / 40
-        let l:m = (a:x - 55) % 40
-        if l:m < 20
-          return l:n
-        else
-          return l:n + 1
-        endif
-      endif
-    endif
-  endfun
+  let l:q = 0
 
-  " returns the actual color level for the given color index
-  fun <SID>rgb_level(n)
-    if &t_Co == 88
-      if a:n == 0
-        return 0
-      elseif a:n == 1
-        return 139
-      elseif a:n == 2
-        return 205
-      else
-        return 255
-      endif
-    else
-      if a:n == 0
-        return 0
-      else
-        return 55 + (a:n * 40)
-      endif
-    endif
-  endfun
+	if (a:l < 0.5)
+		let l:q = a:l * (1 + a:s)
+	else
+		let l:q = a:l + a:s - a:l * a:s
+	endif
+  let l:p = 2 * a:l - l:q
+	return [
+        \ 255 * HueToRGB(l:p, l:q, a:h + 1.0 / 3),
+        \ 255 * HueToRGB(l:p, l:q, a:h),
+        \ 255 * HueToRGB(l:p, l:q, a:h - 1.0 / 3)]
+endfunction
 
-  " returns the palette index for the given R/G/B color indices
-  fun <SID>rgb_color(x, y, z)
-    if &t_Co == 88
-      return 16 + (a:x * 16) + (a:y * 4) + a:z
-    else
-      return 16 + (a:x * 36) + (a:y * 6) + a:z
-    endif
-  endfun
+function! Dec2hex(x)
+  let l:d = {
+    \ 10: 'a',
+    \ 11: 'b',
+    \ 12: 'c',
+    \ 13: 'd',
+    \ 14: 'e',
+    \ 15: 'f'
+  \ }
 
-  " returns the palette index to approximate the given R/G/B color levels
-  fun <SID>color(r, g, b)
-    " get the closest grey
-    let l:gx = <SID>grey_number(a:r)
-    let l:gy = <SID>grey_number(a:g)
-    let l:gz = <SID>grey_number(a:b)
+  let l:d1 = float2nr(a:x) / 16
+  let l:d2 = float2nr(a:x) % 16
 
-    " get the closest color
-    let l:x = <SID>rgb_number(a:r)
-    let l:y = <SID>rgb_number(a:g)
-    let l:z = <SID>rgb_number(a:b)
+  let l:d1 = get(l:d, l:d1, l:d1)
+  let l:d2 = get(l:d, l:d2, l:d2)
 
-    if l:gx == l:gy && l:gy == l:gz
-      " there are two possibilities
-      let l:dgr = <SID>grey_level(l:gx) - a:r
-      let l:dgg = <SID>grey_level(l:gy) - a:g
-      let l:dgb = <SID>grey_level(l:gz) - a:b
-      let l:dgrey = (l:dgr * l:dgr) + (l:dgg * l:dgg) + (l:dgb * l:dgb)
-      let l:dr = <SID>rgb_level(l:gx) - a:r
-      let l:dg = <SID>rgb_level(l:gy) - a:g
-      let l:db = <SID>rgb_level(l:gz) - a:b
-      let l:drgb = (l:dr * l:dr) + (l:dg * l:dg) + (l:db * l:db)
-      if l:dgrey < l:drgb
-        " use the grey
-        return <SID>grey_color(l:gx)
-      else
-        " use the color
-        return <SID>rgb_color(l:x, l:y, l:z)
-      endif
-    else
-      " only one possibility
-      return <SID>rgb_color(l:x, l:y, l:z)
-    endif
-  endfun
+  return l:d1 . l:d2
+endfunction
 
-  " returns the palette index to approximate the 'rrggbb' hex string
-  fun <SID>rgb(rgb)
-    let l:r = ('0x' . strpart(a:rgb, 0, 2)) + 0
-    let l:g = ('0x' . strpart(a:rgb, 2, 2)) + 0
-    let l:b = ('0x' . strpart(a:rgb, 4, 2)) + 0
+function ParseHsl(s)
+  let l:_ = a:s
+  let l:_ = substitute(l:_, 'hsl(', '[', '')
+  let l:_ = substitute(l:_, ')',    ']', '')
+  let l:_ = substitute(l:_, '%',    '',  'g')
+  let l:_ = eval(l:_)
+  let [l:h, l:s, l:l] = [
+    \ l:_[0] * 1.0 / 360,
+    \ l:_[1] * 1.0 / 100,
+    \ l:_[2] * 1.0 / 100]
+  return [l:h, l:s, l:l]
+endfunction
 
-    return <SID>color(l:r, l:g, l:b)
-  endfun
+function! Hsl(cssfn)
+  let [l:h, l:s, l:l] = ParseHsl(a:cssfn)
+  let [d1, d2, d3] = HSLtoRGB(l:h, l:s, l:l)
+  return Dec2hex(d1) . Dec2hex(d2) . Dec2hex(d3)
+endfunction
 
-  " sets the highlighting for the given group
-  fun <SID>X(group, fg, bg, attr)
-    let l:attr = a:attr
-    if g:two_firewatch_italics == 0 && l:attr ==? 'italic'
-      let l:attr = 'none'
-    endif
+" hsl(0, 70%, 40%);
+"}}} parse colors
 
-    if a:fg !=? ''
-      exec 'hi ' . a:group . ' guifg=#' . a:fg . ' ctermfg=' . <SID>rgb(a:fg)
-    endif
-    if a:bg !=? ''
-      exec 'hi ' . a:group . ' guibg=#' . a:bg . ' ctermbg=' . <SID>rgb(a:bg)
-    endif
-    if a:attr !=? ''
-      exec 'hi ' . a:group . ' gui=' . l:attr . ' cterm=' . l:attr
-    endif
-  endfun
-
-  "}}}
-
-  " Color definition --------------------------------------------------------{{{
-  if &background ==? 'light'
-    let s:uno_1 = '2d2006'
-    let s:uno_2 = '896724'
-    let s:uno_3 = 'B29762'
-    let s:uno_4 = 'B6ad9a'
-
-    let s:duo_1 = '065289'
-    let s:duo_2 = '718ecd'
-    let s:duo_3 = 'aeb3b7'
-
-    let s:syntax_color_renamed  = '33a0ff'
-    let s:syntax_color_added    = '43d08a'
-    let s:syntax_color_modified = 'e0c285'
-    let s:syntax_color_removed  = 'e05252'
-
-    let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = 'FAF8F5'
-    let s:syntax_accent           = '447EBB'
-    let s:syntax_gutter           = 'EAE1D2'
-    let s:syntax_selection        = 'E5DDCB'
-    let s:syntax_fold_bg          = 'd1cec7'
-    let s:syntax_cursor_line      = 'F3EFE7'
-  else
-    let s:uno_1 = 'd6e9ff'
-    let s:uno_2 = 'abb2bf'
-    let s:uno_3 = '6e88a6'
-    let s:uno_4 = '55606d'
-
-    let s:duo_1 = 'c8ae9d'
-    let s:duo_2 = 'e06c75'
-    let s:duo_3 = 'dd672c'
-
-    let s:syntax_color_renamed  = '33a0ff'
-    let s:syntax_color_added    = '43d08a'
-    let s:syntax_color_modified = 'e0c285'
-    let s:syntax_color_removed  = 'e05252'
-
-    let s:syntax_fg               = s:uno_2
-    let s:syntax_bg               = '282c34'
-    let s:syntax_accent           = '56b6c2'
-    let s:syntax_gutter           = '636d83'
-    let s:syntax_selection        = '3e4452'
-    let s:syntax_fold_bg          = '5c6370'
-    let s:syntax_cursor_line      = '2c323c'
+" sets the highlighting for the given group
+fun <SID>X(group, fg, bg, attr)
+  let l:attr = a:attr
+  if g:two_firewatch_italics == 0 && l:attr ==? 'italic'
+    let l:attr = 'none'
   endif
 
-  " neovim :terminal colors
-  let g:terminal_color_0 = "#282c34"
-  let g:terminal_color_8 = "#282c34"
-  let g:terminal_color_1 = "#e06c75"
-  let g:terminal_color_9 = "#e06c75"
-  let g:terminal_color_2 = "#98c379"
-  let g:terminal_color_10 = "#98c379"
-  let g:terminal_color_3 = "#e5c07b"
-  let g:terminal_color_11 = "#e5c07b"
-  let g:terminal_color_4 = "#61afef"
-  let g:terminal_color_12 = "#61afef"
-  let g:terminal_color_5 = "#c678dd"
-  let g:terminal_color_13 = "#c678dd"
-  let g:terminal_color_6 = "#56b6c2"
-  let g:terminal_color_14 = "#56b6c2"
-  let g:terminal_color_7 = "#dcdfe4"
-  let g:terminal_color_15 = "#dcdfe4"
+  if a:fg !=? ''
+    exec 'hi ' . a:group . ' guifg=' . a:fg
+  endif
+  if a:bg !=? ''
+    exec 'hi ' . a:group . ' guibg=' . a:bg
+  endif
+  if a:attr !=? ''
+    exec 'hi ' . a:group . ' gui=' . l:attr
+  endif
+endfun
 
-  "}}}
+"}}}
+
+  " Color definition --------------------------------------------------------{{{
+
+  " Diff colors.
+  let s:color_diff_change            = '#cdcdfd'
+  let s:color_diff_delete            = '#ffcddc'
+  let s:color_diff_add               = '#c9e6c9'
+  let s:color_diff_text              = '#b6f2b6'
+
+  " @see https://www.google.com/search?q=color+picker for conversion rgb->hsv
+  if &background ==? 'light'
+    " {{{ Light
+    " First color.
+    let s:uno_1 = '#332405' " 40°, 90%, 20%
+    let s:uno_2 = '#8c6923' " 40°, 75%, 55%
+    let s:uno_3 = '#b29762' " 40°, 45%, 70%
+    let s:uno_4 = '#998f7a' " 40°, 20%, 60%
+
+    " Second color.
+    let s:duo_1 = '#0f5499' " 210°, 90%, 50%
+    let s:duo_2 = '#528fcc' " 210°, 60%, 80%
+    let s:duo_3 = '#919599' " 210°,  5%, 60%
+
+    "
+    let s:syntax_fg               = s:uno_2
+    let s:syntax_bg               = '#faf8f5' " 36°, 2%, 98%
+
+    let s:syntax_error            = '#cc7a7a' " 0°, 40%, 80%
+
+    let s:syntax_accent           = s:uno_2
+    let s:syntax_selection        = '#e6decf' " 40°, 10%, 90%
+    let s:syntax_signcolumn       = '#ebe7df' " 40°, 5%, 92%
+    let s:syntax_fold_bg          = '#ccc5b8' " 40°, 10%, 80%
+    let s:syntax_cursor_line      = '#f3efe7' " 40°, 5%, 95%
+    " }}}
+  else
+    " {{{ Dark
+    " First color.
+    let s:uno_1 = '#d6e9ff' " 212°, 16%, 100%
+    let s:uno_2 = '#abb2bf' " 219°, 10%, 75%
+    let s:uno_3 = '#6e88a6' " 212°, 34%, 65%
+    let s:uno_4 = '#7a8799' " 215°, 20%, 70
+
+    " Second color.
+    let s:duo_1 = '#c8ae9d' " 24°, 22%, 78%
+    let s:duo_2 = '#e06c75' " 355°, 52%, 88%
+    let s:duo_3 = '#dd672c' " 20°, 80%, 87%
+
+    let s:syntax_fg               = s:uno_2
+    let s:syntax_bg               = '#23272e' " 218°, 24%, 18%
+
+    "
+    let s:syntax_error            = '#cc3d3d'
+
+    let s:syntax_accent           = '#56b6c2'
+    let s:syntax_selection        = '#3e4452'
+    let s:syntax_signcolumn       = '#55606d' " 213°, 22%, 43%
+    let s:syntax_fold_bg          = '#5c6370'
+    let s:syntax_cursor_line      = '#2c323c'
+    " }}}
+  endif
+
+  " Terminal colors {{{
+  let g:terminal_color_0  = ''
+  let g:terminal_color_8  = ''
+  let g:terminal_color_1  = '#e06c75'
+  let g:terminal_color_9  = '#e06c75'
+  let g:terminal_color_2  = '#98c379'
+  let g:terminal_color_10 = '#98c379'
+  let g:terminal_color_3  = '#e5c07b'
+  let g:terminal_color_11 = '#e5c07b'
+  let g:terminal_color_4  = '#61afef'
+  let g:terminal_color_12 = '#61afef'
+  let g:terminal_color_5  = '#c678dd'
+  let g:terminal_color_13 = '#c678dd'
+  let g:terminal_color_6  = '#56b6c2'
+  let g:terminal_color_14 = '#56b6c2'
+  let g:terminal_color_7  = ''
+  let g:terminal_color_15 = ''
+
+  if &background ==? 'light'
+    let g:terminal_color_0  = '#282c34'
+    let g:terminal_color_8  = '#4d4d4d'
+    let g:terminal_color_7  = '#737780'
+    let g:terminal_color_15 = '#a1a7b3'
+  else " Dark
+    let g:terminal_color_0  = '#000000'
+    let g:terminal_color_8  = '#4d4d4d'
+    let g:terminal_color_7  = '#737780'
+    let g:terminal_color_15 = '#a1a7b3'
+  endif
+  " }}}
+
+"}}} color definition
 
   " Vim editor color --------------------------------------------------------{{{
+  "            group          fg                bg                    attr
   call <sid>X('bold',         '',               '',                   'bold')
   call <sid>X('ColorColumn',  '',               s:syntax_cursor_line, '')
   call <sid>X('Conceal',      '',               '',                   '')
@@ -310,18 +229,19 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('CursorColumn', '',               s:syntax_cursor_line, '')
   call <sid>X('CursorLine',   '',               s:syntax_cursor_line, '')
   call <sid>X('Directory',    s:uno_1,          '',                   '')
-  call <sid>X('ErrorMsg',     s:syntax_color_removed,  s:syntax_bg,          'none')
+  call <sid>X('ErrorMsg',     s:syntax_error,   s:syntax_bg,          'none')
   call <sid>X('VertSplit',    s:syntax_fold_bg, '',                   'none')
-  call <sid>X('Folded',       s:syntax_bg,      s:syntax_fold_bg,     '')
+  call <sid>X('Folded',       s:uno_1,          s:syntax_fold_bg,     '')
   call <sid>X('FoldColumn',   s:uno_3,          s:syntax_cursor_line, '')
   call <sid>X('IncSearch',    s:syntax_bg,      s:uno_4,              '')
   call <sid>X('LineNr',       s:syntax_fold_bg, '',                   '')
   call <sid>X('CursorLineNr', s:uno_2,          '',                   'none')
-  call <sid>X('MatchParen',   s:syntax_bg,      s:syntax_accent,      '')
+  call <sid>X('MatchParen',   s:syntax_accent,  s:syntax_bg,          'bold')
   call <sid>X('Italic',       '',               '',                   'italic')
-  call <sid>X('ModeMsg',      s:syntax_color_added,      '',                   '')
+  call <sid>X('ModeMsg',      s:color_diff_add, '',                   '')
   call <sid>X('MoreMsg',      s:syntax_fg,      '',                   '')
-  call <sid>X('NonText',      s:uno_4,          '',                   '')
+  call <sid>X('NonText',      s:syntax_signcolumn, '',                '')
+  call <sid>X('EndOfBuffer',  s:syntax_bg,      '',                   '')
   call <sid>X('PMenu',        '',               s:syntax_selection,   '')
   call <sid>X('PMenuSel',     '',               s:syntax_bg,          '')
   call <sid>X('PMenuSbar',    '',               s:syntax_bg,          '')
@@ -341,7 +261,7 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('TooLong',      s:syntax_accent,  '',                   '')
   call <sid>X('WildMenu',     s:syntax_fg,      s:uno_4,              '')
   call <sid>X('Normal',       s:syntax_fg,      s:syntax_bg,          '')
-  call <sid>X('SignColumn',   '',               s:uno_4,              '')
+  call <sid>X('SignColumn',   '',               s:syntax_signcolumn,  '')
   call <sid>X('Special',      s:duo_2,          '',                   '')
   " }}}
 
@@ -379,8 +299,8 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   call <sid>X('Debug',          '',                     '',          '')
   call <sid>X('Underlined',     s:duo_1,                '',          'underline')
   call <sid>X('Ignore',         '',                     '',          '')
-  call <sid>X('Error',          s:syntax_color_removed, s:syntax_bg, 'bold')
-  call <sid>X('Todo',           s:syntax_color_added,   s:syntax_bg, '')
+  call <sid>X('Error',          s:syntax_error,         s:syntax_bg, 'bold')
+  call <sid>X('Todo',           s:duo_1,                s:syntax_bg, '')
   " }}}
 
   " Asciidoc highlighting ---------------------------------------------------{{{
@@ -403,15 +323,14 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Diff highlighting -------------------------------------------------------{{{
-  call <sid>X('DiffAdd',     s:syntax_color_added,    s:syntax_selection, '')
-  call <sid>X('DiffChange',  s:syntax_color_modified, s:syntax_selection, '')
-  call <sid>X('DiffDelete',  s:syntax_color_removed,  s:syntax_selection, '')
-  call <sid>X('DiffText',    s:uno_2,                 s:syntax_selection, '')
-  call <sid>X('DiffAdded',   s:duo_2,                 s:syntax_selection, '')
-  call <sid>X('DiffFile',    s:syntax_accent,         s:syntax_selection, '')
-  call <sid>X('DiffNewFile', s:duo_2,                 s:syntax_selection, '')
-  call <sid>X('DiffLine',    s:uno_2,                 s:syntax_selection, '')
-  call <sid>X('DiffRemoved', s:syntax_accent,         s:syntax_selection, '')
+  call <sid>X('DiffAdd',     '000000', s:color_diff_add,    '')
+  call <sid>X('DiffChange',  '000000', s:color_diff_change, '')
+  call <sid>X('DiffDelete',  '000000', s:color_diff_delete, '')
+  call <sid>X('DiffText',    '000000', s:color_diff_text,   '')
+
+  " fugitive.vim
+  call <sid>X('diffAdded',   g:terminal_color_2,      '', '')
+  call <sid>X('diffRemoved', g:terminal_color_1,   '', '')
   " }}}
 
   " C/C++ and other languages like that -------------------------------------{{{
@@ -514,8 +433,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   hi link GitGutterAdd    SignifySignAdd
   hi link GitGutterChange SignifySignChange
   hi link GitGutterDelete SignifySignDelete
-  call <sid>X('diffAdded',   s:duo_2,         '', '')
-  call <sid>X('diffRemoved', s:syntax_accent, '', '')
   " }}}
 
   " HTML highlighting -------------------------------------------------------{{{
@@ -675,17 +592,6 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
 
 " Delete functions =========================================================={{{
   delf <SID>X
-  delf <SID>rgb
-  delf <SID>color
-  delf <SID>rgb_color
-  delf <SID>rgb_level
-  delf <SID>rgb_number
-  delf <SID>grey_color
-  delf <SID>grey_level
-  delf <SID>grey_number
-"}}}
-
-endif
 "}}}
 
 
