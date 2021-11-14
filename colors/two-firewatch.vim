@@ -640,10 +640,10 @@ if has('gui_running') || &t_Co == 88 || &t_Co == 256
   " }}}
 
   " Spelling highlighting ---------------------------------------------------{{{
-  call <sid>X('SpellBad',     '', s:syntax_bg, 'undercurl')
-  call <sid>X('SpellLocal',   '', s:syntax_bg, 'undercurl')
-  call <sid>X('SpellCap',     '', s:syntax_bg, 'undercurl')
-  call <sid>X('SpellRare',    '', s:syntax_bg, 'undercurl')
+  call <sid>X('SpellBad',    s:syntax_color_removed, s:syntax_bg, 'bold')
+  call <sid>X('SpellLocal',  s:syntax_color_removed, s:syntax_bg, 'bold')
+  call <sid>X('SpellCap',    s:syntax_color_removed, s:syntax_bg, 'bold')
+  call <sid>X('SpellRare',   s:syntax_color_removed, s:syntax_bg, 'bold')
   " }}}
 
   " Vim highlighting --------------------------------------------------------{{{
